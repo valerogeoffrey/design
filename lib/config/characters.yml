@@ -1,0 +1,25 @@
+wizzard:
+  Bellatrix:
+    type: 1
+    points: 70
+    attacks:
+      avada kedavra: 50
+      expeliarmus: 60
+  Voldemort:
+    type: 1
+    points: 100
+    attacks:
+      avada kedavra: 50
+      expeliarmus: 60
+  Rogue:
+    type: 2
+    points: 80
+    attacks:
+      avada kedavra: 50
+      expeliarmus: 60
+  Dumbledore:
+    type: 2
+    points: 150
+    attacks:
+      avada kedavra: 50
+      expeliarmus: 60
