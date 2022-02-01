@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Fight
   module DisplayerStrategy
     class BaseDisplayer
@@ -10,7 +12,7 @@ module Fight
       end
 
       def attacks_choice(player)
-        puts "what attack do you want to triger?"
+        puts 'what attack do you want to triger?'
         player.attacks.keys.each_with_index do |attack, index|
           puts "#{index + 1} - #{attack}"
         end
@@ -20,8 +22,8 @@ module Fight
 
       def attack_congrats(player, attack)
         puts ''
-        puts "you use the spell " + player.attacks.to_a[attack - 1].first.to_s
-        puts "Impressive ! "
+        puts 'you use the spell ' + player.attacks.to_a[attack - 1].first.to_s
+        puts 'Impressive ! '
       end
     end
   end

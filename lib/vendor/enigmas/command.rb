@@ -1,8 +1,11 @@
+# frozen_string_literal: true
+
 module Enigmas
   class Command
-    attr_accessor :enigma, :strategy, :displayer, :try
     TRY = 2
-    def initialize(enigma , strategy, displayer )
+    attr_accessor :enigma, :strategy, :displayer, :try
+
+    def initialize(enigma, strategy, displayer)
       @enigma = enigma
       @displayer = displayer
       @strategy = strategy.on(enigma)
@@ -17,7 +20,7 @@ module Enigmas
         response = fetch_console
         strategy.response = response
 
-        displayer.try_again(try_left) if !strategy.good_result?
+        displayer.try_again(try_left) unless strategy.good_result?
         break if excedded_try?
         break if good_result?
       end
@@ -27,7 +30,7 @@ module Enigmas
     end
 
     def excedded_try?
-      if try == TRY && !strategy.good_result?
+      if try >= TRY && !strategy.good_result?
         displayer.excedded_try
         true
       end

@@ -1,0 +1,342 @@
+#
+# Rules specified here take precedence over default Rubocop config
+# Check the guide : https://github.com/rubocop-hq/ruby-style-guide
+#
+
+require:
+  - rubocop-rails
+  - rubocop-performance
+  - rubocop-rspec
+
+AllCops:
+  TargetRubyVersion: 2.6
+  Exclude:
+    - 'bin/**/*'
+    - 'lib/tasks/**/*'
+    - 'vendor/gems/**/*'
+    - 'Guardfile'
+  NewCops: enable
+
+################################################################################
+################################## Layout ######################################
+################################################################################
+
+Layout/LineLength:
+  Description: 'Limit lines to X characters.'
+  Enabled: true
+  AutoCorrect: true
+  Max: 160
+
+Layout/BlockAlignment:
+  Description: 'Align block ends correctly.'
+  Enabled: true
+  EnforcedStyleAlignWith: start_of_block
+
+Layout/CaseIndentation:
+  Description: 'Indentation of when in a case/when/[else/]end.'
+  Enabled: true
+  EnforcedStyle: end
+
+Layout/ClassStructure:
+  Description: 'Enforces a configured order of definitions within a class body.'
+  Enabled: true
+  Categories:
+    module_inclusion:
+      - include
+      - prepend
+      - extend
+    attribute_macros:
+      - store_accessor
+      - attr_accessor
+      - attr_reader
+      - attr_writer
+    association:
+      - belongs_to
+      - has_one
+      - has_and_belongs_to_many
+      - has_many
+    macros:
+      - validates
+      - validate
+  ExpectedOrder:
+      - module_inclusion
+      - constants
+      - public_attribute_macros
+      - association
+      - public_delegate
+      - macros
+      - public_class_methods
+      - initializer
+      - public_methods
+      - protected_attribute_macros
+      - protected_methods
+      - private_attribute_macros
+      - private_delegate
+      - private_methods
+
+Layout/FirstArrayElementLineBreak:
+  Description: >-
+                 Checks for a line break before the first element in a
+                 multi-line array.
+  Enabled: true
+
+Layout/FirstHashElementLineBreak:
+  Description: >-
+                 Checks for a line break before the first element in a
+                 multi-line hash.
+  Enabled: true
+
+Layout/FirstMethodArgumentLineBreak:
+  Description: >-
+                 Checks for a line break before the first argument in a
+                 multi-line method call.
+  Enabled: true
+
+Layout/FirstMethodParameterLineBreak:
+  Description: >-
+                 Checks for a line break before the first parameter in a
+                 multi-line method parameter definition.
+  Enabled: true
+
+################################################################################
+################################## Naming ######################################
+################################################################################
+
+Naming/BlockParameterName:
+  Description: >-
+                Checks for block parameter names that contain capital letters,
+                end in numbers, or do not meet a minimal length.
+  Enabled: true
+  VersionAdded: '0.53'
+  # Parameter names may be equal to or greater than this value
+  MinNameLength: 3
+  # # Whitelisted names that will not register an offense
+  AllowedNames:
+    - id
+    - io
+  # Blacklisted names that will register an offense
+  ForbiddenNames: []
+  Exclude:
+    - 'app/admin/**/*'
+    - 'app/views/admin/**/*'
+    - 'spec/factories/**/*'
+    - 'db/migrate/**/*'
+    - 'config/initializers/simple_form_bootstrap.rb'
+    - 'config/initializers/simple_form.rb'
+
+Naming/VariableNumber:
+  Description: >-
+    Allow both normalcase and snake_case format for variable name with integer
+  Enabled: false
+
+################################################################################
+################################## Lint #######################################
+################################################################################
+Lint/RaiseException:
+  Enabled: true
+
+Lint/StructNewOverride:
+  Enabled: true
+
+################################################################################
+################################## Style #######################################
+################################################################################
+Style/GuardClause:
+  Description: 'Check for conditionals that can be replaced with guard clauses'
+  StyleGuide: '#no-nested-conditionals'
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Description: 'This cop checks the style of children definitions at classes and modules'
+  Enabled: false
+
+Style/AsciiComments:
+  Description: 'Use only ascii symbols in comments.'
+  StyleGuide: '#english-comments'
+  Enabled: false
+
+Style/Documentation:
+  Description: 'Document classes and non-namespace modules.'
+  Enabled: false
+
+Style/SymbolArray:
+  Description: 'Use arrays of symbols.'
+  EnforcedStyle: brackets
+  Enabled: true
+
+Style/WordArray:
+  Description: 'Use arrays of words.'
+  StyleGuide: '#percent-w'
+  Enabled: true
+  EnforcedStyle: brackets
+
+Style/FormatStringToken:
+  Description: 'Use a consistent style for named format string tokens.'
+  Enabled: false
+
+################################################################################
+################################## Rails #######################################
+################################################################################
+
+Rails:
+  Description: 'Rails specific cops are always run'
+  Enabled: true
+
+Rails/ReversibleMigration:
+  Description: 'Checks whether the change method of the migration file is reversible.'
+  Enabled: false
+
+Rails/CreateTableWithTimestamps:
+  Description: >-
+                  Checks the migration for which timestamps are not included
+                  when creating a new table.
+  Enabled: false
+
+Rails/UnknownEnv:
+  Environments:
+    - production
+    - review
+    - development
+    - staging
+    - release
+    - test
+
+Rails/FilePath:
+  Description: 'Uniformity on joining path style'
+  Enabled: true
+  EnforcedStyle: arguments
+
+################################################################################
+################################## Rspec #######################################
+################################################################################
+
+RSpec/DescribedClass:
+  Enabled: false
+
+RSpec/MessageExpectation:
+  Description: Checks for consistent message expectation style.
+  Enabled: true
+  EnforcedStyle: allow
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: true
+  Max: 25
+  Exclude:
+    - 'spec/acceptance/**/*'
+
+RSpec/EmptyLineAfterExample:
+  Enabled: false
+
+################################################################################
+######################### >>> To be Refactor Asap <<<< #########################
+### Metrics are desactived or with high breakpoint to comply with our legacy ###
+############# Those metrics and rules should be removed over times #############
+################################################################################
+
+Metrics/AbcSize:
+  Description: >-
+                 A calculated magnitude based on number of assignments,
+                 branches, and conditions.
+  Enabled: true
+  Exclude:
+    - 'db/migrate/**/*'
+  Max: 185 # Default value ~ 20
+
+Metrics/BlockLength:
+  Description: 'Avoid long blocks with many lines.'
+  Enabled: true
+  CountComments: false
+  Max: 210 # Default value ~ 20
+  ExcludedMethods:
+    # By default, exclude the `#refine` method, as it tends to have larger
+    # associated blocks.
+    - refine
+  Exclude:
+    - 'spec/**/*'
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'app/admin/**/*'
+    - 'app/views/admin/**/*'
+
+Metrics/BlockNesting:
+  Description: 'Avoid excessive block nesting'
+  Enabled: true
+  CountBlocks: false
+  Max: 4 # Default value ~ 3
+
+Metrics/ClassLength:
+  Description: 'Avoid classes longer than 100 lines of code.'
+  Enabled: true
+  CountComments: false
+  Max: 560 # Default value ~ 100
+  Exclude:
+    - 'db/**/*'
+
+Metrics/CyclomaticComplexity:
+  Description: >-
+                 A complexity metric that is strongly correlated to the number
+                 of test cases needed to validate a method.
+  Enabled: true
+  Max: 25 # Default value ~ 6
+
+Metrics/MethodLength:
+  Description: 'Avoid methods longer than 10 lines of code.'
+  StyleGuide: '#short-methods'
+  Enabled: true
+  CountComments: false
+  Max: 150 # Default value ~ 10
+  Exclude:
+    - 'db/**/*'
+
+Metrics/ModuleLength:
+  Description: 'Avoid modules longer than 100 lines of code.'
+  Enabled: true
+  CountComments: false
+  Max: 210 # Default value ~ 100
+
+Metrics/ParameterLists:
+  Description: 'Avoid parameter lists longer than three or four parameters.'
+  StyleGuide: '#too-many-params'
+  Enabled: true
+  Max: 7 # Default value ~ 5
+  CountKeywordArgs: false
+
+Metrics/PerceivedComplexity:
+  Description: >-
+                 A complexity metric geared towards measuring complexity for a
+                 human reader.
+  Enabled: true
+  Max: 30 # Default value ~ 7
+
+Rails/SkipsModelValidations:
+  Description: >-
+                 Use methods that skips model validations with caution.
+                 See reference for more information.
+  Enabled: false
+
+Rails/InverseOf:
+  Enabled: false
+
+Rails/HasAndBelongsToMany:
+  Enabled: false
+
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+
+Rails/OutputSafety:
+  Enabled: true
+  Exclude:
+    - 'app/admin/**/*'
+    - 'app/views/admin/**/*'
+
+RSpec/NestedGroups:
+  Enabled: true
+  Max: 5 # Would be perfect at 3
+
+RSpec/MessageChain:
+  Enabled: false
+  Exclude:
+    - 'spec/services/updater/network_feed_updater/**/*'

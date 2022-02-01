@@ -1,18 +1,19 @@
+# frozen_string_literal: true
+
 module Enigmas
   class Displayer
-
     class << self
       def ask_question(question)
-        puts question
+        puts question.strip
       end
 
       def congratulation
         puts "> Congratulation, you'r right ! "
-        puts ""
+        puts ''
       end
 
       def excedded_try
-        puts "> you have reach the response limit :( "
+        puts '> you have reach the response limit :( '
       end
 
       def introduction

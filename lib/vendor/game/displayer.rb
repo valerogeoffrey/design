@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Game
   class Displayer
     class << self
@@ -6,13 +8,13 @@ module Game
       end
 
       def room_position(position)
-        puts ""
-        puts "> ---- > Moove silently > -------------- >"
+        puts ''
+        puts '> ---- > Moove silently > -------------- >'
         puts ">> You are in the room ## #{position} ##"
       end
 
       def you_are_out
-        puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+        puts '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
         puts "> You'r out of this darkness hunted castle"
       end
     end

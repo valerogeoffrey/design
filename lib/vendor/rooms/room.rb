@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module Rooms
   class Room
-
     attr_reader :name, :description, :actions, :id, :first_room, :last_room, :moves
     attr_accessor :enigma, :fight
+
     def initialize(attributes)
       @id = attributes[:id]
       @name = attributes[:name]
@@ -15,7 +17,7 @@ module Rooms
     def self.hydrate(attributes)
       raise MissingRoomAttributes unless correct_attributes?(attributes)
 
-      self.new(attributes)
+      new(attributes)
     end
 
     private

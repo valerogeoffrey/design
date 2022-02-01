@@ -1,7 +1,7 @@
+# frozen_string_literal: true
+
 require 'yaml'
 require_relative 'observer'
-
-
 
 def autoload
   [
@@ -34,8 +34,8 @@ def autoload
     'vendor/game/walker',
     'vendor/game/displayer',
     'vendor/game/strategy',
-    'vendor/game/command',
-  ].each{ |file| require_relative(file) }
+    'vendor/game/command'
+  ].each { |file| require_relative(file) }
 end
 # need these files to play this mortal game
 autoload

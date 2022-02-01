@@ -1,27 +1,26 @@
+# frozen_string_literal: true
+
 module Characters
   class Character
-
-    attr_accessor :points, :enemy
+    attr_accessor :points, :enemy, :ally, :attacks
     attr_reader :name, :attacks, :type, :strategy
 
-    def initialize(name = :harry_potter, points = 50)
-      @name = name
-      @points = points
+    def initialize(definition)
+      @name = definition.name
+      @points = definition.points
+      @attacks= definition.attacks
+      @type = definition.type
 
       @enemy = nil
       @ally = nil
     end
 
-    def setting(strategy)
-      @strategy = strategy
-    end
-
     def self.create(*args)
-      self.new(*args)
+      new(*args)
     end
 
     def fight_how(strategy)
-      @strategy = strategy
+      @strategy = strategy.init(self)
     end
 
     def fight_with(characters)
@@ -31,28 +30,25 @@ module Characters
 
     def fight_against(characters)
       @enemy = characters
-      strategy.set_enemy(@enemy)
+      strategy.fight_against(@enemy)
       self
     end
 
     def attack(name)
+      raise CharactersStrategyError if strategy.nil?
+
       strategy.can_attack?(name)
-      process_attack_action(name)
-    rescue DeadPlayerError => _ then
+      strategy.attack(name)
+   rescue CharactersStrategyError => _e then
+      :no_strategy
+    rescue DeadPlayerError => _e then
       :player_dead
-    rescue DeadEnemyError => _ then
+    rescue DeadEnemyError => _e then
       :enemy_dead
-    rescue UnknowPlayerError => _ then
+    rescue UnknowPlayerError => _e then
       :unkwnow_enemy
-    rescue UnknowAttackError => _ then
+    rescue UnknowAttackError => _e then
       :unauthorize_attack
-    end
-
-    private
-
-    def process_attack_action(name)
-      strategy.process_attack_action(name)
     end
   end
 end
-

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Enigmas
   class Builder
     def self.build

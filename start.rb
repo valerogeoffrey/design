@@ -1,5 +1,6 @@
-require_relative 'lib/bootstrap'
+# frozen_string_literal: true
 
+require_relative 'lib/bootstrap'
 
 map = Map.build(mode: :room_with_enigma)
 cursor = Walker.new(map)

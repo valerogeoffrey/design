@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'singleton'
 
 module Event
@@ -20,7 +22,6 @@ module Event
     end
 
     def self.sub
-
       instance
     end
 
@@ -28,7 +29,6 @@ module Event
       puts subject
       instance
     end
-
   end
 end
 

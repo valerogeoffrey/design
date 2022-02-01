@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module Fight
   class FightManager
-
     attr_accessor :displayer, :strategy
+
     def initialize(strategy:, displayer:)
       @strategy = strategy
       @displayer = displayer
@@ -9,8 +11,8 @@ module Fight
 
     def prepare_fighters(fighters: {})
       add_fighters(fighters)
-    rescue PlayerPresenceError => _
-      return :no_players
+    rescue PlayerPresenceError => _e
+      :no_players
     end
 
     def start_game
@@ -18,19 +20,19 @@ module Fight
         strategy.prevent_dead_player
         attack_your_enemy
         response_attack_from_your_enemy
-      rescue DeadPlayerError => _
+      rescue DeadPlayerError => _e
         displayer.player_is_dead
         break
-      rescue DeadEnemyError => _
+      rescue DeadEnemyError => _e
         displayer.enemy_is_dead
         break
-      rescue NoAuthAttackError => _
+      rescue NoAuthAttackError => _e
         displayer.attack_issue
         response_attack_from_your_enemy
         next
       end
 
-      return :finished
+      :finished
     end
 
     def reset
@@ -44,11 +46,11 @@ module Fight
       response_attack_from_your_enemy
 
       true
-    rescue DeadPlayerError => _
+    rescue DeadPlayerError => _e
       displayer.player_is_dead
-    rescue DeadEnemyError => _
+    rescue DeadEnemyError => _e
       displayer.enemy_is_dead
-    rescue NoAuthAttackError => _
+    rescue NoAuthAttackError => _e
       displayer.attack_issue
       response_attack_from_your_enemy
     end
@@ -90,6 +92,5 @@ module Fight
     def fetch_attack
       gets.chomp.to_i
     end
-
   end
 end

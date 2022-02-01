@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 # Game::Command.new.play
 module Game
   class Command
-
     attr_reader :cursor, :displayer, :game_strategy
 
     def initialize(strategy)

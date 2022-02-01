@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Game
   class Map
     class << self
@@ -30,8 +32,8 @@ module Game
         enigmas_command = build_enigmas_command
         shuffled_rooms = rooms.to_a.shuffle
         event_rooms = shuffled_rooms[0..1]
-        event_rooms.each do |_,room|
-          room.enigma = enigmas_command.shuffle.first
+        event_rooms.each do |_, room|
+          room.enigma = enigmas_command.sample
         end
       end
 
@@ -39,8 +41,8 @@ module Game
         enigmas_command = build_fights_command
         shuffled_rooms = rooms.to_a.shuffle
         event_rooms = shuffled_rooms[0..1]
-        event_rooms.each do |_,room|
-          room.enigma = enigmas_command.shuffle.first
+        event_rooms.each do |_, room|
+          room.enigma = enigmas_command.sample
         end
       end
 

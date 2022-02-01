@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module Game
   class Walker
-
     attr_reader :map, :available_position
     attr_accessor :position, :moove
 
@@ -14,6 +15,7 @@ module Game
 
     def position=(position)
       raise InvalidPosition unless available_position.include? position.to_sym
+
       @position = position
     end
 
@@ -45,12 +47,12 @@ module Game
     def set_moove(moove)
       raise InvalidMoove unless available_moves.include? moove.to_sym
 
-      @moove= moove.to_sym
+      @moove = moove.to_sym
       self
     end
 
     def is_legal_moove?
-      map[position].moves.keys.include?(moove) ? true : false
+      map[position].moves.key?(moove) ? true : false
     end
 
     def room

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Enigmas
   module Strategy
     class Free < BaseStrategy
@@ -6,7 +8,7 @@ module Enigmas
       end
 
       def question
-        enigma.question + " free response"
+        enigma.question + ' free response'
       end
     end
   end

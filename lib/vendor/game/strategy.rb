@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module Game
   class Strategy
-
     attr_accessor :map, :cursor, :room, :command_enigma, :fight
 
     def initialize(map, cursor, displayer)
@@ -24,15 +25,14 @@ module Game
     end
 
     def play_enigma
-      command_enigma.play if command_enigma
+      command_enigma&.play
     end
 
     def play_fight
-      command_fight.play if command_fight
+      command_fight&.play
     end
 
-    def play_mvp
-    end
+    def play_mvp; end
 
     def end?
       cursor.is_final_room?

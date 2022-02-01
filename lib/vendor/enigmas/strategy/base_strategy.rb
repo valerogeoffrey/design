@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Enigmas
   module Strategy
     class BaseStrategy
@@ -18,7 +20,7 @@ module Enigmas
       end
 
       def apply_bonus_malus(try)
-        if try == 2 && ! good_result?
+        if try == 2 && !good_result?
           # add Malus /  sub points / sub items inventory / move in previous rooms etc...
           # Observer.update('reset_position', true)
         end

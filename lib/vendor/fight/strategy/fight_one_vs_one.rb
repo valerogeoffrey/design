@@ -1,10 +1,13 @@
+# frozen_string_literal: true
+
 module Fight
   module Strategy
     class FightOneVsOne < BaseStrategy
-
       attr_accessor :master_player, :player_two
+
       def initialize(fighters:)
         raise PlayerPresenceError if fighters.empty?
+
         add_fighters(fighters)
       end
 
@@ -50,7 +53,7 @@ module Fight
         player_two.enemy
       end
 
-      def attack_name(player,attack)
+      def attack_name(player, attack)
         player.attacks.to_a[attack - 1].first
       end
 

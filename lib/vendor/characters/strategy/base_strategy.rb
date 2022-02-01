@@ -1,16 +1,10 @@
+# frozen_string_literal: true
+
 module Characters
   module Strategy
     class BaseStrategy
 
-      def fight_with(_)
-        raise NotImplementedError "#{self.class} have not implement #{__method__}"
-      end
-
       def fight_against(_)
-        raise NotImplementedError "#{self.class} have not implement #{__method__}"
-      end
-
-      def set_enemy(_)
         raise NotImplementedError "#{self.class} have not implement #{__method__}"
       end
 
@@ -18,7 +12,7 @@ module Characters
         raise NotImplementedError "#{self.class} have not implement #{__method__}"
       end
 
-      def process_attack_action(_)
+      def attack(_)
         raise NotImplementedError "#{self.class} have not implement #{__method__}"
       end
 
