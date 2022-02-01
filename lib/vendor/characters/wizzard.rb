@@ -1,9 +1,15 @@
 module Characters
-    class Wizzard
-        attr_accessor :points, :name
-        def initialize(name = "Harry Potter", point = 5)
-            @name   = name
-            @points = point
-        end
+  class Wizzard < Character
+
+    attr_accessor :points, :attacks, :name, :type
+    def initialize(*args)
+      @attacks = {
+        stupefix: 10,
+        expeliarmus: 30,
+        avada_kedavra: 45,
+      }
+      super
     end
+
+  end
 end

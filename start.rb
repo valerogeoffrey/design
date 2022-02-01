@@ -1,3 +1,9 @@
 require_relative 'lib/bootstrap'
 
-Game::Command.new.play
+
+map = Map.build(mode: :room_with_enigma)
+cursor = Walker.new(map)
+displayer = Displayer
+strategy = Strategy.new(map, cursor, displayer)
+
+Game::Command.new(strategy).play

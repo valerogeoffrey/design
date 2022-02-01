@@ -14,7 +14,10 @@ fighter = Fight::FightManager.new(fighters: [a,b])
 fighter.add_fighters([a,b])
 fighter.start_game
 
-
+fighter.init
+fighter.with(a)
+fighter.againt(b)
+fighter.start_game
 
 
 

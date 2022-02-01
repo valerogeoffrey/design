@@ -1,28 +1,28 @@
-require_relative "generic.rb"
 module Rooms
-  class Room < Generic
+  class Room
 
-    attr_accessor :name, :description, :actions, :id, :is_first_room, :is_last_room, :moves
-
-    def initialize()
-      @id            = :r1
-      @name          = "Name Of your Room"
-      @description   = "Description Of your room"
-      @is_first_room = false
-      @is_last_room  = false
-      @moves         = {}
-
-      super(@name, @description)
+    attr_reader :name, :description, :actions, :id, :first_room, :last_room, :moves
+    attr_accessor :enigma, :fight
+    def initialize(attributes)
+      @id = attributes[:id]
+      @name = attributes[:name]
+      @description = attributes[:description]
+      @first_room = attributes[:first_room]
+      @last_room = attributes[:last_room]
+      @moves = attributes[:moves]
     end
 
-    def hydrate(args)
-      @id            = args[:id] || @id
-      @name          = args[:name] || @name
-      @description   = args[:description] || @description
-      @is_first_room = args[:is_first_room] || @is_first_room
-      @is_last_room  = args[:is_last_room] || @is_last_room
-      @moves         = args[:moves] || @moves
-      self
+    def self.hydrate(attributes)
+      raise MissingRoomAttributes unless correct_attributes?(attributes)
+
+      self.new(attributes)
+    end
+
+    private
+
+    def self.correct_attributes?(attributes)
+      return true
+      [:name, :description, :actions, :id, :is_first_room, :is_last_room, :moves] - attributes.key == []
     end
 
     def puts_description
