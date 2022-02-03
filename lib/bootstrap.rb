@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
+require 'ostruct'
 require 'yaml'
 require_relative 'observer'
 
+# need these files to play this mortal game
 def autoload
   [
     'utile',
@@ -37,5 +39,5 @@ def autoload
     'vendor/game/command'
   ].each { |file| require_relative(file) }
 end
-# need these files to play this mortal game
+
 autoload

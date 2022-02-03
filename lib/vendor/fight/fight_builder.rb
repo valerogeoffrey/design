@@ -13,7 +13,7 @@ module Fight
       fight_manager = Fight::FightManager.new(strategy: fight_strategy, displayer: displayer)
       fight_manager.prepare_fighters(fighters: fighters)
       fight_manager
-    rescue Fight::Strategy::PlayerPresenceError => _e
+    rescue PlayerPresenceError => _e
       :no_player_in_game
     end
 

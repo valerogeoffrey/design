@@ -4,6 +4,7 @@ require 'spec_helper'
 require_relative '../../../../lib/vendor/enigmas/enigma'
 
 RSpec.describe 'Enigmas::Enigma' do
+
   let (:definition) do
     {
       question: '> How much is: 1 + 1 ?',
@@ -12,12 +13,14 @@ RSpec.describe 'Enigmas::Enigma' do
       choices: ['1', '2', '6', '3']
     }
   end
+  let(:self_enigma) { Enigmas::Enigma }
   let(:enigma) { Enigmas::Enigma.hydrate(definition) }
   let(:empty_enigma) { Enigmas::Enigma.hydrate({}) }
 
   it 'respond to an hydrate self method' do
-    expect(enigma).to respond_to(:hydrate)
+    expect(self_enigma).to respond_to(:hydrate)
   end
+
   it 'respond to somes mandatory attributes' do
     expect(empty_enigma).to respond_to(:question)
     expect(empty_enigma).to respond_to(:response)

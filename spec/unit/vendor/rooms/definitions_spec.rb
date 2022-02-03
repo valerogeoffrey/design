@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require_relative '../lib/vendor/game/application'
+require_relative '../../../../lib/bootstrap'
 
 RSpec.describe 'Rooms::Definition' do
   let(:builder) {  }

@@ -6,11 +6,7 @@ module Characters
     attr_reader :name, :attacks, :type, :strategy
 
     def initialize(definition)
-      @name = definition.name
-      @points = definition.points
-      @attacks= definition.attacks
-      @type = definition.type
-
+      differ_init(definition)
       @enemy = nil
       @ally = nil
     end
@@ -39,7 +35,7 @@ module Characters
 
       strategy.can_attack?(name)
       strategy.attack(name)
-   rescue CharactersStrategyError => _e then
+    rescue CharactersStrategyError => _e then
       :no_strategy
     rescue DeadPlayerError => _e then
       :player_dead
@@ -49,6 +45,32 @@ module Characters
       :unkwnow_enemy
     rescue UnknowAttackError => _e then
       :unauthorize_attack
+    end
+
+    private
+    def differ_init(definition)
+      definition = definition.nil? ? OpenStruct.new : definition
+
+      @name = definition.name || default_name
+      @points = definition.points || default_points
+      @attacks = definition.attacks || default_attacks
+      @type = definition.type || default_type
+    end
+
+    def default_name
+      'Harry Potter'
+    end
+
+    def default_points
+      50
+    end
+
+    def default_attacks
+      { stupefix: 10 }
+    end
+
+    def default_type
+      2
     end
   end
 end

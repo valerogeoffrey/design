@@ -4,7 +4,7 @@ module Characters
   class Wizzard < Character
     attr_accessor :points, :attacks, :name, :type
 
-    def initialize(definition)
+    def initialize(definition = nil)
       super
     end
   end

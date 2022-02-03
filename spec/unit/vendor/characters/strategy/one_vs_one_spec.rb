@@ -61,9 +61,11 @@ RSpec.describe 'Characters::Strategy::OneVsOne' do
       expect(character2.points).to eq(0)
     end
   end
+
   it 'can check the point for an attack' do
     init_strategy.fight_against(character2)
-    expect { init_strategy.point_for('test') }.to raise_error(UnknowAttackError)
+    expect(init_strategy.point_for('test')).to eq(:unknow_attack)
+    expect(init_strategy.point_for('stupefix')).to eq(50)
   end
 
   context "when we need to make actions" do
