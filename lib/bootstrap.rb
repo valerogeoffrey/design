@@ -4,6 +4,7 @@ require 'ostruct'
 require 'yaml'
 require_relative 'observer'
 
+
 # need these files to play this mortal game
 def autoload
   [
@@ -12,10 +13,13 @@ def autoload
     'vendor/characters/character',
     'vendor/characters/definition',
     'vendor/characters/wizzard',
-    'vendor/characters/character_builder',
-    'vendor/characters/strategy/base_strategy',
-    'vendor/characters/strategy/one_vs_one',
-    'vendor/fight/fight_manager',
+    'vendor/characters/hero',
+    'vendor/characters/builder',
+    'vendor/characters/character_factory',
+    'vendor/characters/interface_factory',
+    'vendor/characters/interface/base_strategy',
+    'vendor/characters/interface/one_vs_one',
+    'vendor/fight/commander',
     'vendor/fight/fight_builder',
     'vendor/fight/displayer_strategy/base_displayer',
     'vendor/fight/displayer_strategy/displayer',
@@ -41,3 +45,5 @@ def autoload
 end
 
 autoload
+
+Characters::Hero.instance

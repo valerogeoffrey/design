@@ -10,8 +10,8 @@ module Enigmas
         choices: ['1', '2', '6', '3']
       },
       {
-        question: '> How much is: 1 + 1 ? ',
-        response: '2',
+        question: '> How much is: 4 + 1 ? ',
+        response: '5',
         type: :free
       },
       {

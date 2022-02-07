@@ -15,10 +15,6 @@ module Characters
       new(*args)
     end
 
-    def fight_how(strategy)
-      @strategy = strategy.init(self)
-    end
-
     def fight_with(characters)
       @ally = characters
       self
@@ -30,24 +26,8 @@ module Characters
       self
     end
 
-    def attack(name)
-      raise CharactersStrategyError if strategy.nil?
-
-      strategy.can_attack?(name)
-      strategy.attack(name)
-    rescue CharactersStrategyError => _e then
-      :no_strategy
-    rescue DeadPlayerError => _e then
-      :player_dead
-    rescue DeadEnemyError => _e then
-      :enemy_dead
-    rescue UnknowPlayerError => _e then
-      :unkwnow_enemy
-    rescue UnknowAttackError => _e then
-      :unauthorize_attack
-    end
-
     private
+
     def differ_init(definition)
       definition = definition.nil? ? OpenStruct.new : definition
 

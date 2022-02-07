@@ -2,7 +2,8 @@
 
 module Game
   class Strategy
-    attr_accessor :map, :cursor, :room, :command_enigma, :fight
+    attr_accessor :map, :cursor, :room, :command_enigma, :fight, :displayer
+    attr_reader :command_fight
 
     def initialize(map, cursor, displayer)
       @map = map
@@ -11,17 +12,18 @@ module Game
     end
 
     def play
-      displayer.ask_for_moove(cursor.available_moves.join(' / '))
+      ask_for_moove
       moove = fetch_console
-      cursor.moove_to(moove)
-      displayer.room_position(cursor.position.to_s)
+      moove_to(moove)
+      display_position
 
-      @command_enigma = cursor.room.enigma
-      @command_fight = cursor.room.fight
+      set_commands
 
       play_enigma
       play_fight
       play_mvp
+    rescue InvalidMoove
+      puts "sorry you can't go in this direction"
     end
 
     def play_enigma
@@ -30,12 +32,33 @@ module Game
 
     def play_fight
       command_fight&.play
+
+      command_fight.strategy.prevent_dead_player
     end
 
     def play_mvp; end
 
     def end?
       cursor.is_final_room?
+    end
+
+    private
+
+    def set_commands
+      @command_enigma = cursor.room.enigma
+      @command_fight = cursor.room.fight
+    end
+
+    def moove_to(moove)
+      cursor.moove_to(moove)
+    end
+
+    def display_position
+      displayer.room_position(cursor.position.to_s)
+    end
+
+    def ask_for_moove
+      displayer.ask_for_moove(cursor.available_moves.join(' / '))
     end
   end
 end

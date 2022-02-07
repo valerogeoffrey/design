@@ -5,7 +5,7 @@ module Rooms
   class RoomBuilder
     def self.build
       rooms = {}
-      Rooms.fetch_rooms_definition.each do |room_definition|
+      Rooms.other_config.each do |room_definition|
         rooms[room_definition[:id]] = Room.hydrate(room_definition)
       end
 

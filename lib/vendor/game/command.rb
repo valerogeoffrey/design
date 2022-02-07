@@ -16,6 +16,8 @@ module Game
       loop do
         game_strategy.play
         break if game_strategy.end?
+      rescue DeadPlayerError => _
+        break
       end
 
       displayer.you_are_out
@@ -24,7 +26,7 @@ module Game
     private
 
     def position
-      strategy.cursor.position.to_s
+      game_strategy.cursor.position.to_s
     end
   end
 end

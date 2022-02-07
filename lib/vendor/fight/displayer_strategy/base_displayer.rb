@@ -12,18 +12,18 @@ module Fight
       end
 
       def attacks_choice(player)
-        puts 'what attack do you want to triger?'
+        puts "> #{player.name} what spell do you want to use ?"
         player.attacks.keys.each_with_index do |attack, index|
           puts "#{index + 1} - #{attack}"
         end
         puts ''
-        puts "You'r choice ? "
+        puts "> You'r choice ? "
       end
 
       def attack_congrats(player, attack)
         puts ''
-        puts 'you use the spell ' + player.attacks.to_a[attack - 1].first.to_s
-        puts 'Impressive ! '
+        puts '# ---------------------------------------------------------------#'
+        puts "# > You use the spell #{attack.to_s} Impressive ! #{player.name} has #{player.points} points left"
       end
     end
   end

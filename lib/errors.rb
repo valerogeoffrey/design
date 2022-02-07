@@ -10,3 +10,4 @@ class MissingRoomAttributes < StandardError; end
 class InvalidPosition < StandardError; end
 class InvalidMoove < StandardError; end
 class CharactersStrategyError < StandardError; end
+class NoAuthAttackError < StandardError; end

@@ -10,7 +10,7 @@ RSpec.describe 'Definition' do
       'name' => 'Harry Potter',
       'type' => 2,
       'points' => 80,
-      'attacks' => { 'avada kedavra' => 50, 'expeliarmus' => 60 }
+      'attacks' => { :avada_kedavra => 50, :expeliarmus => 60 }
     }
   end
 
@@ -38,6 +38,10 @@ RSpec.describe 'Definition' do
   end
   it 'has set the attacks attribute' do
     expect(definition.attacks.class).to eq(Hash)
-    expect(definition.attacks).to eq({ 'avada kedavra' => 50, 'expeliarmus' => 60 })
+    expect(definition.attacks).to eq({ :avada_kedavra => 50, :expeliarmus => 60 })
+  end
+
+  it 'has to have symbol when defining attack name' do
+    expect(definition.attacks.keys.map(&:class).uniq).to eq([Symbol])
   end
 end

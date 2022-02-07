@@ -2,10 +2,10 @@
 
 module Game
   class Walker
+
     attr_reader :map, :available_position
     attr_accessor :position, :moove
-
-    def initialize(map = Rooms::RoomBuilder.build)
+    def initialize(map)
       @map = map
       @available_position = map.keys
       @position = @available_position.first
@@ -45,14 +45,14 @@ module Game
     end
 
     def set_moove(moove)
-      raise InvalidMoove unless available_moves.include? moove.to_sym
+      raise InvalidMoove unless legal_moove? moove.to_sym
 
       @moove = moove.to_sym
       self
     end
 
-    def is_legal_moove?
-      map[position].moves.key?(moove) ? true : false
+    def legal_moove?(moove)
+      available_moves.include?(moove.to_sym) ? true : false
     end
 
     def room

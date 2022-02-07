@@ -19,8 +19,13 @@ RSpec.describe 'Rooms::RoomBuilder' do
 
   end
   let(:room) { Rooms::Room.hydrate(definition) }
+
   it 'has a valid instance' do
     expect(room.class).to eq(Rooms::Room)
+  end
+
+  it 'respond to the hydrate self method' do
+    expect(Rooms::Room).to respond_to(:hydrate)
   end
 
   it 'return the correct attributes' do
@@ -31,4 +36,5 @@ RSpec.describe 'Rooms::RoomBuilder' do
     expect(room.last_room).to eq(false)
     expect(room.moves).to eq({forward: :room1})
   end
+
 end

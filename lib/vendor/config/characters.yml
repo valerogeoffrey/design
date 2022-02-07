@@ -3,23 +3,31 @@ wizzard:
     type: 1
     points: 70
     attacks:
-      avada kedavra: 50
-      expeliarmus: 60
+      Confringo: 60
+      bomba: 40
+      doloris: 50
+      Glacius: 50
   Voldemort:
     type: 1
-    points: 100
+    points: 50
     attacks:
-      avada kedavra: 50
-      expeliarmus: 60
+      avada kedavra: 80
+      imperium: 60
+      doloris: 80
+      Draconifors: 80
   Rogue:
     type: 2
     points: 80
     attacks:
-      avada kedavra: 50
-      expeliarmus: 60
+      Legilimens: 50
+      Incarcerem: 60
+      Flipendo: 60
+      Sectumsempra: 100
   Dumbledore:
     type: 2
-    points: 150
+    points: 120
     attacks:
-      avada kedavra: 50
-      expeliarmus: 60
+      avada kedavra: 70
+      expeliarmus: 65
+      Destructum: 80
+      Flipendo: 58

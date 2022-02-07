@@ -3,7 +3,7 @@
 module Fight
   module Strategy
     class BaseStrategy
-      def prevent_dead_player
+      def prevent_dead_players
         raise NotImplementedError, "class #{clas} has not implemented #{__method__}"
       end
 

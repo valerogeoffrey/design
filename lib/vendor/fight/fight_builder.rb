@@ -10,9 +10,7 @@ module Fight
 
     def build
       initialize_strategies(mode)
-      fight_manager = Fight::FightManager.new(strategy: fight_strategy, displayer: displayer)
-      fight_manager.prepare_fighters(fighters: fighters)
-      fight_manager
+      Fight::Commander.new(fight_strategy, displayer)
     rescue PlayerPresenceError => _e
       :no_player_in_game
     end
@@ -22,34 +20,27 @@ module Fight
     def initialize_strategies(mode, options = {})
       case mode
       when :one_vs_one then init_one_vs_one_strategy
-      when :one_enemy then init_one_enemy_strategy(options[:hero])
-      end
-    end
-
-    def init_one_enemy_strategy(_hero)
-      base_builder_strategy do
-        player_two = Characters::FetchCharacter.new.fetch_character(:wizzard).sample
       end
     end
 
     def init_one_vs_one_strategy
       base_builder_strategy do
-        player_one = Characters::Wizzard.new
+        player_one = Characters::Hero.instance
         player_two = Characters::FetchCharacter.new.fetch_character(:wizzard).sample
+
+        [player_one, player_two]
       end
     end
 
     def base_builder_strategy(*_args)
-      character_strategy = Characters::Strategy::OneVsOne
-
-      yield if block_given?
-
-      player_one.fight_how(character_strategy)
-      player_two.fight_how(character_strategy)
-      @fighters = { master: hero, enemy: player_two }
-
       @displayer = DisplayerStrategy::Displayer.new
-      @fight_strategy = Strategy::FightOneVsOne.new(fighters: @fighters)
+      character_strategy = Characters::Interface::OneVsOne
+
+      if block_given?
+        player_one, player_two = yield
+      end
+      character_strategy = character_strategy.new(player_one).against(player_two)
+      @fight_strategy = Strategy::FightOneVsOne.new(character_strategy)
     end
   end
 end

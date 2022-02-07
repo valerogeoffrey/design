@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Characters
-  module Strategy
+  module Interface
     class BaseStrategy
 
       def fight_against(_)
